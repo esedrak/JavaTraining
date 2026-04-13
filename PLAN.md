@@ -57,20 +57,12 @@ JavaTraining/
 │       └── shared-http/
 │
 ├── workshop/
-│   ├── basics/                          # Module 2: 33 Java topics
+│   ├── basics/                          # Module 1: 33 Java topics
 │   │   ├── build.gradle.kts             # Shared deps (JUnit5, AssertJ, Mockito, JMH, Spring Boot Test)
 │   │   ├── README.md
 │   │   └── src/
 │   │       ├── main/java/.../           # Topic implementations
 │   │       └── test/java/.../           # Topic tests
-│   │
-│   ├── fundamentals/                    # Module 1: API concepts (docs only)
-│   │   ├── README.md
-│   │   ├── ApiDesign/
-│   │   ├── ApiFundamentals/
-│   │   ├── ApiLifecycleAndDeployment/
-│   │   ├── SecurityAndObservability/
-│   │   └── TheAgenticFuture/
 │   │
 │   └── challenges/
 │       ├── README.md
@@ -117,7 +109,7 @@ JavaTraining/
 
 ---
 
-## Module 2 — Topic-by-Topic Mapping (33 topics)
+## Module 1 — Topic-by-Topic Mapping (33 topics)
 
 Each topic gets: `README.md` (concept explanation + Mermaid diagrams + code examples + pitfalls + further reading), Java implementation files, and JUnit 5 tests.
 
@@ -261,13 +253,12 @@ help:           @grep -E '^[a-zA-Z_-]+:' Makefile | sort
 |-------|--------|-------------|
 | 0 | Small | Scaffold Gradle multi-module, folder structure, wrapper, version catalog, `.gitignore`, `.editorconfig` |
 | 1 | Small | Docker-compose (rename db to `javabank`), Makefile, Dockerfiles (`eclipse-temurin:21`), copy wiremock/migration |
-| 2 | Small | Port Fundamentals docs (replace any .NET refs with Java/Spring equivalents in markdown) |
-| 3 | **Large** | 33 Basics topics (code + tests + READMEs) |
-| 4 | **Large** | Bank service (6 modules: domain, repo, service, api, cli, tests) |
-| 5 | Medium | Temporal workflows (4 modules + tests) |
-| 6 | Medium | Challenges (FixMe, ImplMe, Bank Quest, Temporal Quest) |
-| 7 | Medium | All READMEs and documentation |
-| 8 | Small | GitHub Actions CI/CD |
+| 2 | **Large** | 33 Basics topics (code + tests + READMEs) |
+| 3 | **Large** | Bank service (6 modules: domain, repo, service, api, cli, tests) |
+| 4 | Medium | Temporal workflows (4 modules + tests) |
+| 5 | Medium | Challenges (FixMe, ImplMe, Bank Quest, Temporal Quest) |
+| 6 | Medium | All READMEs and documentation |
+| 7 | Small | GitHub Actions CI/CD |
 
 ---
 
