@@ -20,15 +20,13 @@ public class UserService {
    * @throws RuntimeException if no user with the given id exists
    */
   public User getUser(String id) {
-    return repository
-        .findById(id)
-        .orElseThrow(() -> new RuntimeException("User not found: " + id));
+    return repository.findById(id).orElseThrow(() -> new RuntimeException("User not found: " + id));
   }
 
   /**
    * Creates a new user with a generated UUID and persists it.
    *
-   * @param name  display name
+   * @param name display name
    * @param email email address
    * @return the saved user (as returned by the repository)
    */

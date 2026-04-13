@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
  * Demonstrates Spring's {@code @Async} support.
  *
  * <p>{@code @Async} causes Spring to execute the method on a thread-pool thread rather than the
- * caller's thread. The method must return {@link CompletableFuture} (or {@link java.util.concurrent.Future})
- * so the caller can await the result or compose further operations.
+ * caller's thread. The method must return {@link CompletableFuture} (or {@link
+ * java.util.concurrent.Future}) so the caller can await the result or compose further operations.
  *
  * <p>Requires {@code @EnableAsync} on a configuration class to activate the proxy.
  */

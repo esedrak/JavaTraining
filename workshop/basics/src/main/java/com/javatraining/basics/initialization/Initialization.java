@@ -9,8 +9,8 @@ import org.springframework.stereotype.Component;
  * <p>Demonstrates four distinct initialization mechanisms:
  *
  * <ol>
- *   <li><strong>Static initializer block</strong> — runs once when the class is first loaded by
- *       the JVM, before any instance is created.
+ *   <li><strong>Static initializer block</strong> — runs once when the class is first loaded by the
+ *       JVM, before any instance is created.
  *   <li><strong>Instance initializer block</strong> — runs every time a new instance is created,
  *       immediately before the constructor body.
  *   <li><strong>Lazy initialization with double-checked locking</strong> — defers object creation

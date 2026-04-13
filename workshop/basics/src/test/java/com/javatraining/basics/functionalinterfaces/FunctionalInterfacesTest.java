@@ -48,8 +48,7 @@ class FunctionalInterfacesTest {
     @Test
     @DisplayName("filter strings longer than 4 characters")
     void filterLongStrings() {
-      List<String> result =
-          fi.filter(List.of("hi", "hello", "hey", "world"), s -> s.length() > 4);
+      List<String> result = fi.filter(List.of("hi", "hello", "hey", "world"), s -> s.length() > 4);
       assertThat(result).containsExactly("hello", "world");
     }
   }
@@ -125,8 +124,7 @@ class FunctionalInterfacesTest {
       Predicate<Integer> isPositive = n -> n > 0;
       Predicate<Integer> isEven = n -> n % 2 == 0;
 
-      List<Integer> result =
-          fi.filter(List.of(-4, -1, 0, 1, 2, 3, 4, 5), isPositive.and(isEven));
+      List<Integer> result = fi.filter(List.of(-4, -1, 0, 1, 2, 3, 4, 5), isPositive.and(isEven));
 
       assertThat(result).containsExactly(2, 4);
     }
@@ -144,8 +142,7 @@ class FunctionalInterfacesTest {
     void orAcceptsEitherCondition() {
       Predicate<Integer> isZero = n -> n == 0;
       Predicate<Integer> isNegative = n -> n < 0;
-      List<Integer> result =
-          fi.filter(List.of(-3, -1, 0, 1, 2, 3), isZero.or(isNegative));
+      List<Integer> result = fi.filter(List.of(-3, -1, 0, 1, 2, 3), isZero.or(isNegative));
       assertThat(result).containsExactly(-3, -1, 0);
     }
   }

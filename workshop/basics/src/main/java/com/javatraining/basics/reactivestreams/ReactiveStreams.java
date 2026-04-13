@@ -30,9 +30,7 @@ public class ReactiveStreams {
    * remaining string to upper-case.
    */
   public Flux<String> processStrings(List<String> input) {
-    return Flux.fromIterable(input)
-        .filter(s -> s != null && !s.isBlank())
-        .map(String::toUpperCase);
+    return Flux.fromIterable(input).filter(s -> s != null && !s.isBlank()).map(String::toUpperCase);
   }
 
   /**
@@ -46,8 +44,8 @@ public class ReactiveStreams {
   }
 
   /**
-   * Demonstrates back-pressure by limiting the request rate with {@code limitRate}. Subscribers
-   * can request elements in smaller batches, preventing fast producers from overwhelming slow
+   * Demonstrates back-pressure by limiting the request rate with {@code limitRate}. Subscribers can
+   * request elements in smaller batches, preventing fast producers from overwhelming slow
    * consumers.
    */
   public Flux<Integer> backpressureDemo() {
@@ -106,8 +104,8 @@ public class ReactiveStreams {
   }
 
   /**
-   * Demonstrates a timed Flux with a virtual-time-compatible structure.
-   * Uses delayElements so tests can use StepVerifier's virtual time.
+   * Demonstrates a timed Flux with a virtual-time-compatible structure. Uses delayElements so tests
+   * can use StepVerifier's virtual time.
    */
   public Flux<Long> timedFlux() {
     return Flux.interval(Duration.ofSeconds(1)).take(3);

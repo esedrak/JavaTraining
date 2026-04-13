@@ -92,10 +92,7 @@ class AssertJTest {
     @DisplayName("filteredOn narrows list elements")
     void filteredOnNarrowsListElements() {
       List<Integer> numbers = List.of(1, 2, 3, 4, 5, 6, 7, 8);
-      assertThat(numbers)
-          .filteredOn(n -> n % 2 == 0)
-          .containsExactly(2, 4, 6, 8)
-          .hasSize(4);
+      assertThat(numbers).filteredOn(n -> n % 2 == 0).containsExactly(2, 4, 6, 8).hasSize(4);
     }
 
     @Test

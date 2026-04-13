@@ -6,8 +6,8 @@ import java.util.UUID;
  * Demonstrates {@link ThreadLocal} for per-thread correlation IDs.
  *
  * <p>Each thread has its own isolated copy of the correlation ID. Storing a value in one thread
- * does not affect any other thread. Always call {@link #clear()} at the end of a request to
- * prevent memory leaks in thread-pool environments.
+ * does not affect any other thread. Always call {@link #clear()} at the end of a request to prevent
+ * memory leaks in thread-pool environments.
  */
 public class CorrelationContext {
 

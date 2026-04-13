@@ -9,8 +9,8 @@ package com.javatraining.basics.buildprofiles;
  *
  * <h2>Spring Profiles</h2>
  *
- * <p>Spring Boot's {@code @Profile} annotation ({@link org.springframework.context.annotation.Profile})
- * controls which beans are loaded. For example:
+ * <p>Spring Boot's {@code @Profile} annotation ({@link
+ * org.springframework.context.annotation.Profile}) controls which beans are loaded. For example:
  *
  * <pre>
  * {@literal @}Component
@@ -18,8 +18,8 @@ package com.javatraining.basics.buildprofiles;
  * public class DevDataSourceConfig { ... }
  * </pre>
  *
- * <p>Activated via {@code spring.profiles.active=dev} in application properties, or
- * {@code --spring.profiles.active=dev} on the command line.
+ * <p>Activated via {@code spring.profiles.active=dev} in application properties, or {@code
+ * --spring.profiles.active=dev} on the command line.
  */
 public class BuildProfiles {
 
@@ -51,7 +51,7 @@ public class BuildProfiles {
   /**
    * Returns the value of the given environment variable, or {@code defaultValue} if it is not set.
    *
-   * @param key          environment variable name
+   * @param key environment variable name
    * @param defaultValue fallback value
    * @return non-null string
    */
@@ -63,7 +63,7 @@ public class BuildProfiles {
   /**
    * Returns the value of the given system property, or {@code defaultValue} if it is not set.
    *
-   * @param key          property name (e.g. "java.version")
+   * @param key property name (e.g. "java.version")
    * @param defaultValue fallback value
    * @return non-null string
    */
@@ -72,8 +72,8 @@ public class BuildProfiles {
   }
 
   /**
-   * Returns {@code true} if the system property {@code feature.<featureName>} is set to
-   * {@code "true"} (case-insensitive).
+   * Returns {@code true} if the system property {@code feature.<featureName>} is set to {@code
+   * "true"} (case-insensitive).
    *
    * @param featureName the feature flag name
    * @return {@code true} if enabled

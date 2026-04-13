@@ -6,8 +6,9 @@ import org.springframework.stereotype.Component;
 /**
  * Example of a Spring bean that is only loaded when the {@code dev} profile is active.
  *
- * <p>Spring reads the {@code spring.profiles.active} property (or the {@code SPRING_PROFILES_ACTIVE}
- * environment variable) and only registers {@code @Profile}-annotated beans whose profiles match.
+ * <p>Spring reads the {@code spring.profiles.active} property (or the {@code
+ * SPRING_PROFILES_ACTIVE} environment variable) and only registers {@code @Profile}-annotated beans
+ * whose profiles match.
  *
  * <pre>
  * # application.properties

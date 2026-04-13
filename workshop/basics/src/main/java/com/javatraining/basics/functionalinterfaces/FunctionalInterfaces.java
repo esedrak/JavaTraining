@@ -64,9 +64,9 @@ public class FunctionalInterfaces {
    * Returns a new list containing only the elements from {@code items} for which {@code predicate}
    * returns {@code true}.
    *
-   * @param items     source list
+   * @param items source list
    * @param predicate filter criterion
-   * @param <T>       element type
+   * @param <T> element type
    * @return filtered list (preserves order)
    */
   public <T> List<T> filter(List<T> items, Predicate<T> predicate) {
@@ -82,10 +82,10 @@ public class FunctionalInterfaces {
   /**
    * Applies {@code mapper} to every element of {@code items} and returns the mapped values.
    *
-   * @param items  source list
+   * @param items source list
    * @param mapper transformation function
-   * @param <T>    input element type
-   * @param <R>    output element type
+   * @param <T> input element type
+   * @param <R> output element type
    * @return transformed list (preserves order)
    */
   public <T, R> List<R> transform(List<T> items, Function<T, R> mapper) {
@@ -100,10 +100,10 @@ public class FunctionalInterfaces {
    * Folds {@code items} from left to right using {@code accumulator}, starting from {@code
    * identity}.
    *
-   * @param items       source list
-   * @param identity    initial accumulator value
+   * @param items source list
+   * @param identity initial accumulator value
    * @param accumulator combining function
-   * @param <T>         element type
+   * @param <T> element type
    * @return accumulated result
    */
   public <T> T reduce(List<T> items, T identity, BinaryOperator<T> accumulator) {
@@ -117,9 +117,9 @@ public class FunctionalInterfaces {
   /**
    * Calls {@code action} for every element of {@code items}.
    *
-   * @param items  source list
+   * @param items source list
    * @param action side-effecting consumer
-   * @param <T>    element type
+   * @param <T> element type
    */
   public <T> void forEach(List<T> items, Consumer<T> action) {
     for (T item : items) {

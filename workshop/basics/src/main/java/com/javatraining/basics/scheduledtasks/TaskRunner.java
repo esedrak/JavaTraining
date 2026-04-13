@@ -20,8 +20,8 @@ public class TaskRunner {
   private final AtomicInteger executionCount = new AtomicInteger(0);
 
   /**
-   * Runs every 1 000 ms (1 second). {@code fixedRate} measures the delay from the <em>start</em>
-   * of the previous invocation.
+   * Runs every 1 000 ms (1 second). {@code fixedRate} measures the delay from the <em>start</em> of
+   * the previous invocation.
    */
   @Scheduled(fixedRate = 1000)
   public void runPeriodically() {

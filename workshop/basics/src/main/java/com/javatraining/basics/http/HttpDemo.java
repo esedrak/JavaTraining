@@ -9,7 +9,8 @@ import java.time.Duration;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Demonstrates Java's built-in HTTP client introduced in Java 11 ({@code java.net.http.HttpClient}).
+ * Demonstrates Java's built-in HTTP client introduced in Java 11 ({@code
+ * java.net.http.HttpClient}).
  *
  * <p>The client supports both synchronous and asynchronous requests, HTTP/2 by default, and
  * configurable timeouts.
@@ -46,14 +47,9 @@ public class HttpDemo {
    */
   public String get(String url) {
     HttpRequest request =
-        HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .GET()
-            .timeout(Duration.ofSeconds(10))
-            .build();
+        HttpRequest.newBuilder().uri(URI.create(url)).GET().timeout(Duration.ofSeconds(10)).build();
     try {
-      HttpResponse<String> response =
-          client.send(request, HttpResponse.BodyHandlers.ofString());
+      HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
       return response.body();
     } catch (IOException e) {
       throw new RuntimeException("HTTP GET failed for URL: " + url, e);
@@ -71,11 +67,7 @@ public class HttpDemo {
    */
   public CompletableFuture<String> getAsync(String url) {
     HttpRequest request =
-        HttpRequest.newBuilder()
-            .uri(URI.create(url))
-            .GET()
-            .timeout(Duration.ofSeconds(10))
-            .build();
+        HttpRequest.newBuilder().uri(URI.create(url)).GET().timeout(Duration.ofSeconds(10)).build();
     return client
         .sendAsync(request, HttpResponse.BodyHandlers.ofString())
         .thenApply(HttpResponse::body);

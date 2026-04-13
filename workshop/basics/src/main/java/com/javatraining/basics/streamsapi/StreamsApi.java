@@ -43,14 +43,11 @@ public class StreamsApi {
   }
 
   /**
-   * Computes the average age of people older than 18. Returns an empty {@link OptionalDouble} if
-   * no such person exists.
+   * Computes the average age of people older than 18. Returns an empty {@link OptionalDouble} if no
+   * such person exists.
    */
   public OptionalDouble averageAge(List<Person> people) {
-    return people.stream()
-        .filter(p -> p.age() > 18)
-        .mapToInt(Person::age)
-        .average();
+    return people.stream().filter(p -> p.age() > 18).mapToInt(Person::age).average();
   }
 
   /**
@@ -59,7 +56,8 @@ public class StreamsApi {
    * @return map from category name to count
    */
   public Map<String, Long> countByCategory(List<Transaction> transactions) {
-    return transactions.stream().collect(Collectors.groupingBy(Transaction::category, Collectors.counting()));
+    return transactions.stream()
+        .collect(Collectors.groupingBy(Transaction::category, Collectors.counting()));
   }
 
   /** Flattens a list of lists into a single list while preserving order. */

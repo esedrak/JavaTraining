@@ -8,11 +8,11 @@ import java.util.List;
  *
  * <h2>JMH Overview</h2>
  *
- * <p>JMH benchmarks live in a separate source set ({@code src/jmh/java}) to keep them isolated
- * from production code. Each benchmark class carries {@code @BenchmarkMode}, {@code @OutputTimeUnit}
- * and {@code @Warmup} / {@code @Measurement} annotations. The JMH Gradle plugin
- * ({@code me.champeau.jmh}) compiles that source set and produces a self-contained jar via
- * {@code ./gradlew jmh}.
+ * <p>JMH benchmarks live in a separate source set ({@code src/jmh/java}) to keep them isolated from
+ * production code. Each benchmark class carries {@code @BenchmarkMode}, {@code @OutputTimeUnit} and
+ * {@code @Warmup} / {@code @Measurement} annotations. The JMH Gradle plugin ({@code
+ * me.champeau.jmh}) compiles that source set and produces a self-contained jar via {@code ./gradlew
+ * jmh}.
  *
  * <h2>Why naive string concatenation is slow</h2>
  *

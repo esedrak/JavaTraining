@@ -37,11 +37,12 @@ class BuildProfilesTest {
   void currentDetectsKnownOs() {
     OperatingSystem os = buildProfiles.current();
     // The test runner is running on SOME OS — it must not be UNKNOWN on major platforms
-    assertThat(os).isIn(
-        OperatingSystem.WINDOWS,
-        OperatingSystem.MACOS,
-        OperatingSystem.LINUX,
-        OperatingSystem.UNKNOWN);
+    assertThat(os)
+        .isIn(
+            OperatingSystem.WINDOWS,
+            OperatingSystem.MACOS,
+            OperatingSystem.LINUX,
+            OperatingSystem.UNKNOWN);
   }
 
   @Test

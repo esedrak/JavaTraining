@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 /**
  * Demonstrates {@code @Value} for injecting individual property values.
  *
- * <p>{@code @Value} supports SpEL (Spring Expression Language) and default values via the {@code
- * :} separator, so the app starts even when the property is not defined.
+ * <p>{@code @Value} supports SpEL (Spring Expression Language) and default values via the {@code :}
+ * separator, so the app starts even when the property is not defined.
  *
  * <p>Prefer {@link AppConfig} ({@code @ConfigurationProperties}) for groups of related settings;
  * use {@code @Value} for a small number of standalone values.

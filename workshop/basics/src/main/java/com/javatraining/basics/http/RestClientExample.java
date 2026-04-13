@@ -4,8 +4,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClient;
 
 /**
- * Demonstrates Spring 6's {@link RestClient} API — a modern, fluent alternative to
- * {@code RestTemplate}.
+ * Demonstrates Spring 6's {@link RestClient} API — a modern, fluent alternative to {@code
+ * RestTemplate}.
  *
  * <p>Note: The methods in this class show the API surface without making real HTTP calls, since no
  * server is running during tests. Use {@code @SpringBootTest} with a running server, or WireMock,
@@ -38,16 +38,11 @@ public class RestClientExample {
   /**
    * Example of a POST with a request body.
    *
-   * @param path    URL path
+   * @param path URL path
    * @param payload request body
    * @return response body as String
    */
   public String postBody(String path, String payload) {
-    return restClient
-        .post()
-        .uri(path)
-        .body(payload)
-        .retrieve()
-        .body(String.class);
+    return restClient.post().uri(path).body(payload).retrieve().body(String.class);
   }
 }

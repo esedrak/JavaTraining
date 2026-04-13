@@ -3,8 +3,8 @@ package com.javatraining.basics.projectlayout;
 /**
  * Topic 20: Java/Gradle Project Layout
  *
- * <p>Documents the conventional directory structure for a Gradle Java project and demonstrates
- * Java access modifiers.
+ * <p>Documents the conventional directory structure for a Gradle Java project and demonstrates Java
+ * access modifiers.
  */
 public class ProjectLayout {
 

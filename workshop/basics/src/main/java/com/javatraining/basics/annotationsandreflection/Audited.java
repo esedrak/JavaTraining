@@ -23,8 +23,8 @@ import java.lang.annotation.Target;
 public @interface Audited {
 
   /**
-   * Human-readable name of the operation being audited (e.g. "CREATE_USER"). Defaults to the
-   * empty string, in which case the method name should be used.
+   * Human-readable name of the operation being audited (e.g. "CREATE_USER"). Defaults to the empty
+   * string, in which case the method name should be used.
    */
   String operation() default "";
 }

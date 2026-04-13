@@ -94,8 +94,7 @@ class StreamsApiTest {
 
   @Test
   void findFirst_returnsMatchingElement() {
-    Optional<String> result =
-        streamsApi.findFirst(List.of("apple", "banana", "avocado"), "a");
+    Optional<String> result = streamsApi.findFirst(List.of("apple", "banana", "avocado"), "a");
     assertThat(result).isPresent().hasValue("apple");
   }
 

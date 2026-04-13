@@ -34,9 +34,7 @@ class BenchmarkingTest {
   @DisplayName("concat and StringBuilder produce the same result for small inputs")
   void bothMethodsProduceSameResultForSmallInputs() {
     for (int n = 0; n <= 10; n++) {
-      assertThat(demo.stringBuilderLoop(n))
-          .as("n = %d", n)
-          .isEqualTo(demo.stringConcatLoop(n));
+      assertThat(demo.stringBuilderLoop(n)).as("n = %d", n).isEqualTo(demo.stringConcatLoop(n));
     }
   }
 

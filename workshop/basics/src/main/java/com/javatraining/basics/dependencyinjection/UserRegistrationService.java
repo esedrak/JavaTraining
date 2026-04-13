@@ -17,8 +17,8 @@ public class UserRegistrationService {
   private final NotificationService notificationService;
 
   /**
-   * Spring auto-detects a single constructor and injects dependencies automatically. No {@code
-   * @Autowired} annotation is needed.
+   * Spring auto-detects a single constructor and injects dependencies automatically. No
+   * {@code @Autowired} annotation is needed.
    */
   public UserRegistrationService(NotificationService notificationService) {
     this.notificationService = notificationService;

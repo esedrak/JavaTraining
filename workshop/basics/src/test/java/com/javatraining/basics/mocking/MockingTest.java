@@ -76,10 +76,7 @@ class MockingTest {
   @Test
   @DisplayName("getAllUsers returns the list provided by repository")
   void getAllUsersReturnsRepositoryList() {
-    List<User> users =
-        List.of(
-            new User("1", "Alice", "a@a.com"),
-            new User("2", "Bob", "b@b.com"));
+    List<User> users = List.of(new User("1", "Alice", "a@a.com"), new User("2", "Bob", "b@b.com"));
     when(repository.findAll()).thenReturn(users);
 
     List<User> result = userService.getAllUsers();

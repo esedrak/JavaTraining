@@ -1,6 +1,5 @@
 package com.javatraining.basics.resourcemanagement;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

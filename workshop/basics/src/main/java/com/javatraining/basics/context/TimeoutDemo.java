@@ -13,18 +13,18 @@ import java.util.concurrent.TimeoutException;
  * TimeUnit)}.
  *
  * <p>A common pattern in Java is to submit work to an executor and then wait for the result with a
- * deadline. If the deadline is exceeded, the {@link Future} is cancelled and a
- * {@link RuntimeException} is thrown.
+ * deadline. If the deadline is exceeded, the {@link Future} is cancelled and a {@link
+ * RuntimeException} is thrown.
  */
 public class TimeoutDemo {
 
   /**
-   * Runs {@code task} and returns its result, or throws if it does not complete within
-   * {@code timeoutMs} milliseconds.
+   * Runs {@code task} and returns its result, or throws if it does not complete within {@code
+   * timeoutMs} milliseconds.
    *
-   * @param task      the work to perform
+   * @param task the work to perform
    * @param timeoutMs maximum allowed duration in milliseconds
-   * @param <T>       return type of the task
+   * @param <T> return type of the task
    * @return the task's result
    * @throws RuntimeException if the timeout is exceeded or the task throws
    */

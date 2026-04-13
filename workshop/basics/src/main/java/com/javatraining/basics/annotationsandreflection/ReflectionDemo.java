@@ -19,11 +19,7 @@ public class ReflectionDemo {
    * @return sorted list of public method names (may contain duplicates for overloaded methods)
    */
   public List<String> getPublicMethodNames(Class<?> clazz) {
-    return Arrays.stream(clazz.getMethods())
-        .map(Method::getName)
-        .distinct()
-        .sorted()
-        .toList();
+    return Arrays.stream(clazz.getMethods()).map(Method::getName).distinct().sorted().toList();
   }
 
   /**

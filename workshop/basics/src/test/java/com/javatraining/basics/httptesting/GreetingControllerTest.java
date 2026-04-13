@@ -41,10 +41,7 @@ class GreetingControllerTest {
   @DisplayName("POST /api/echo echoes the request body")
   void echoReturnsRequestBody() throws Exception {
     mockMvc
-        .perform(
-            post("/api/echo")
-                .contentType(MediaType.TEXT_PLAIN)
-                .content("test"))
+        .perform(post("/api/echo").contentType(MediaType.TEXT_PLAIN).content("test"))
         .andExpect(status().isOk())
         .andExpect(content().string("test"));
   }

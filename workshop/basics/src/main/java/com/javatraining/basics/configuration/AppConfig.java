@@ -8,9 +8,9 @@ import org.springframework.stereotype.Component;
 /**
  * Topic 15: Configuration — {@code @ConfigurationProperties}
  *
- * <p>Spring Boot binds properties with the {@code app.*} prefix from {@code
- * application.properties} / {@code application.yml} to this class automatically. No {@code
- * @Value} needed for structured config.
+ * <p>Spring Boot binds properties with the {@code app.*} prefix from {@code application.properties}
+ * / {@code application.yml} to this class automatically. No {@code @Value} needed for structured
+ * config.
  *
  * <p>Example {@code application.yml}:
  *

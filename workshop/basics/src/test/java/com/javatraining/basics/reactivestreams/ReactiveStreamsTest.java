@@ -18,9 +18,7 @@ class ReactiveStreamsTest {
 
   @Test
   void generateNumbers_emitsExpectedSequenceAndCompletes() {
-    StepVerifier.create(reactiveStreams.generateNumbers(3))
-        .expectNext(1, 2, 3)
-        .verifyComplete();
+    StepVerifier.create(reactiveStreams.generateNumbers(3)).expectNext(1, 2, 3).verifyComplete();
   }
 
   @Test
@@ -32,8 +30,7 @@ class ReactiveStreamsTest {
 
   @Test
   void processStrings_allBlank_completesEmpty() {
-    StepVerifier.create(reactiveStreams.processStrings(List.of("", " ", "")))
-        .verifyComplete();
+    StepVerifier.create(reactiveStreams.processStrings(List.of("", " ", ""))).verifyComplete();
   }
 
   @Test
@@ -74,15 +71,12 @@ class ReactiveStreamsTest {
 
   @Test
   void backpressureDemo_emitsAllHundredElements() {
-    StepVerifier.create(reactiveStreams.backpressureDemo())
-        .expectNextCount(100)
-        .verifyComplete();
+    StepVerifier.create(reactiveStreams.backpressureDemo()).expectNextCount(100).verifyComplete();
   }
 
   @Test
   void generateNumbers_zero_completesImmediately() {
-    StepVerifier.create(reactiveStreams.generateNumbers(0))
-        .verifyComplete();
+    StepVerifier.create(reactiveStreams.generateNumbers(0)).verifyComplete();
   }
 
   @Test

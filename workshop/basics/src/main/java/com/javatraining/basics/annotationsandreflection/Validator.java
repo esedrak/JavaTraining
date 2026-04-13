@@ -59,19 +59,11 @@ public class Validator {
         }
         if (str.length() < annotation.min()) {
           errors.add(
-              fieldName
-                  + ": length "
-                  + str.length()
-                  + " is less than minimum "
-                  + annotation.min());
+              fieldName + ": length " + str.length() + " is less than minimum " + annotation.min());
         }
         if (str.length() > annotation.max()) {
           errors.add(
-              fieldName
-                  + ": length "
-                  + str.length()
-                  + " exceeds maximum "
-                  + annotation.max());
+              fieldName + ": length " + str.length() + " exceeds maximum " + annotation.max());
         }
       }
     }

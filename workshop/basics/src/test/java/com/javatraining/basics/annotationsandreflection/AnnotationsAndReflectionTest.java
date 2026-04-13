@@ -46,13 +46,10 @@ class AnnotationsAndReflectionTest {
     void auditedAnnotationIsRetainedAtRuntime() throws Exception {
       // Create a test class with an @Audited method via anonymous class isn't possible,
       // but we can verify the annotation's own retention meta-annotation.
-      assertThat(Audited.class.isAnnotationPresent(
-              java.lang.annotation.Retention.class))
-          .isTrue();
+      assertThat(Audited.class.isAnnotationPresent(java.lang.annotation.Retention.class)).isTrue();
       java.lang.annotation.Retention retention =
           Audited.class.getAnnotation(java.lang.annotation.Retention.class);
-      assertThat(retention.value())
-          .isEqualTo(java.lang.annotation.RetentionPolicy.RUNTIME);
+      assertThat(retention.value()).isEqualTo(java.lang.annotation.RetentionPolicy.RUNTIME);
     }
   }
 
@@ -129,7 +126,9 @@ class AnnotationsAndReflectionTest {
       UserForm form = new UserForm("alice", "password123");
       Map<String, Object> fields = reflectionDemo.getFieldValues(form);
 
-      assertThat(fields).containsEntry("username", "alice").containsEntry("password", "password123");
+      assertThat(fields)
+          .containsEntry("username", "alice")
+          .containsEntry("password", "password123");
     }
 
     @Test
