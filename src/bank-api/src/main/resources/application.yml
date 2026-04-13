@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: bank-api
+  datasource:
+    url: jdbc:postgresql://localhost:5432/javabank
+    username: javatrainer
+    password: verysecret
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: false
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
+
+bank:
+  jwt:
+    # Minimum 32 chars for HS256. Override via BANK_JWT_SECRET env var in production.
+    secret: change-me-in-production-must-be-at-least-32-chars!
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.javatraining: INFO
+    org.springframework.security: WARN
