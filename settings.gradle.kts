@@ -2,6 +2,6 @@ rootProject.name = "JavaTraining"
 
 include(
     "workshop:basics",
-    "src:bank",
+    "src:bank-api",
     "src:bank-cli",
 )
