@@ -49,6 +49,7 @@ logs/
 
 # JAR/WAR/EAR
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 *.war
 *.ear
 *.nar
