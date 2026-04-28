@@ -17,8 +17,13 @@ java {
 }
 
 dependencies {
+    // CorrelationIdFilter extends OncePerRequestFilter (spring-web)
+    implementation(libs.spring.boot.starter.web)
+
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.assertj)
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.junit.jupiter)
 }
 
 tasks.test {
