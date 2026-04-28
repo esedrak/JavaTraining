@@ -65,12 +65,35 @@ public class TransferCommand {
 
     @Override
     public Integer call() throws Exception {
-      // TODO (Bank Transfer Quest Bonus 2): implement authenticated transfer
-      // 1. Require BANK_TOKEN with transfers:write scope
-      // 2. POST /v1/transfers with fromAccountId, toAccountId, amount
-      // 3. Print result or friendly error (401, 403, 400, 404)
-      System.err.println("Not yet implemented — complete Bonus Quest 2.");
-      return 1;
+      var token = requireToken();
+      if (token == null) return 1;
+
+      var body =
+          String.format(
+              "{\"fromAccountId\":\"%s\",\"toAccountId\":\"%s\",\"amount\":%s}",
+              fromAccountId, toAccountId, amount);
+
+      var request =
+          withBearer(
+                  HttpRequest.newBuilder()
+                      .uri(URI.create(API_URL + "/v1/transfers"))
+                      .POST(HttpRequest.BodyPublishers.ofString(body))
+                      .header("Content-Type", "application/json"),
+                  token)
+              .build();
+
+      var response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println(response.body());
+
+      if (response.statusCode() == 401) {
+        System.err.println("Error: token missing or expired — re-run the POST /v1/token command and re-export BANK_TOKEN.");
+        return 1;
+      }
+      if (response.statusCode() == 403) {
+        System.err.println("Error: token lacks the 'transfers:write' scope.");
+        return 1;
+      }
+      return response.statusCode() < 400 ? 0 : 1;
     }
   }
 }

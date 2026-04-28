@@ -53,12 +53,25 @@ public class AccountCommand {
 
     @Override
     public Integer call() throws Exception {
-      // TODO (Bank Transfer Quest Bonus 1): implement account get
-      // 1. Require BANK_TOKEN
-      // 2. GET /v1/accounts/{id}
-      // 3. Print JSON response or a friendly error message on 404
-      System.err.println("Not yet implemented — complete Bonus Quest 1.");
-      return 1;
+      var token = requireToken();
+      if (token == null) return 1;
+
+      var request =
+          withBearer(
+                  HttpRequest.newBuilder()
+                      .uri(URI.create(API_URL + "/v1/accounts/" + id))
+                      .GET(),
+                  token)
+              .build();
+
+      var response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+      System.out.println(response.body());
+
+      if (response.statusCode() == 404) {
+        System.err.println("Error: account " + id + " not found.");
+        return 1;
+      }
+      return response.statusCode() < 400 ? 0 : 1;
     }
   }
 
