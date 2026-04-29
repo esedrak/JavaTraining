@@ -3,14 +3,6 @@ plugins {
     alias(libs.plugins.spring.boot)
     alias(libs.plugins.spring.dependency.management)
     alias(libs.plugins.spotless)
-    alias(libs.plugins.flyway)
-}
-
-flyway {
-    url = System.getenv("DB_URL") ?: "jdbc:postgresql://localhost:5432/javabank"
-    user = System.getenv("DB_USER") ?: "javatrainer"
-    password = System.getenv("DB_PASSWORD") ?: "verysecret"
-    locations = arrayOf("classpath:db/migration")
 }
 
 java {
@@ -20,28 +12,26 @@ java {
 }
 
 dependencies {
-    // Workflow interfaces and DTOs (for Quest 6: POST /v1/durable-transfers)
+    // Workflow interfaces and DTOs
     implementation(project(":src:temporal-workflow"))
+
+    // Bank domain — activities use BankService / repositories
+    implementation(project(":src:bank-api"))
+
+    // Temporal SDK
     implementation(libs.temporal.sdk)
 
-    implementation(libs.spring.boot.starter.web)
-    implementation(libs.spring.boot.starter.security)
+    // Spring Boot
+    implementation("org.springframework.boot:spring-boot-starter")
     implementation(libs.spring.boot.starter.data.jpa)
     implementation(libs.postgresql)
-    implementation(libs.flyway.core)
-    implementation(libs.flyway.postgresql)
 
-    implementation(libs.jjwt.api)
-    runtimeOnly(libs.jjwt.impl)
-    runtimeOnly(libs.jjwt.jackson)
-
-    implementation(libs.springdoc)
-
+    // Testing
     testImplementation(libs.spring.boot.starter.test)
     testImplementation(libs.assertj)
+    testImplementation(libs.temporal.testing)
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.junit.jupiter)
-    testImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks.test {

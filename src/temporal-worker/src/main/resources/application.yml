@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: temporal-worker
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/javabank}
+    username: ${DB_USER:javatrainer}
+    password: ${DB_PASSWORD:verysecret}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+
+temporal:
+  # Quest 7: update this if you change the service address
+  service-address: ${TEMPORAL_ADDRESS:localhost:7233}
+  namespace: ${TEMPORAL_NAMESPACE:default}
