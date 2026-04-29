@@ -11,6 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatraining.bank.config.SecurityConfig;
 import com.javatraining.bank.domain.Account;
+import com.javatraining.bank.security.BankPermission;
 import com.javatraining.bank.domain.exception.AccountNotFoundException;
 import com.javatraining.bank.dto.CreateAccountRequest;
 import com.javatraining.bank.service.BankService;
@@ -30,7 +31,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(AccountController.class)
-@Import({SecurityConfig.class, com.javatraining.bank.config.JwtAuthenticationFilter.class})
+@Import({SecurityConfig.class, com.javatraining.bank.config.JwtAuthenticationFilter.class, BankPermission.class})
 @DisplayName("AccountController")
 class AccountControllerTest {
 

@@ -1,18 +1,13 @@
 package com.javatraining.bank.controller;
 
-import com.javatraining.bank.domain.Transfer;
-import com.javatraining.bank.domain.exception.AccountNotFoundException;
-import com.javatraining.bank.domain.exception.InsufficientFundsException;
-import com.javatraining.bank.domain.exception.TransferNotFoundException;
 import com.javatraining.bank.dto.CreateTransferRequest;
+import com.javatraining.bank.dto.TransferResponse;
 import com.javatraining.bank.service.BankService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.net.URI;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,74 +36,46 @@ public class TransferController {
 
   @GetMapping
   @Operation(summary = "List all transfers")
-  @ApiResponse(responseCode = "200", description = "List of transfers")
-  @ApiResponse(responseCode = "401", description = "Missing or invalid JWT token")
-  public ResponseEntity<List<Transfer>> listTransfers() {
-    return ResponseEntity.ok(bankService.listTransfers());
+  public ResponseEntity<List<TransferResponse>> listTransfers() {
+    return ResponseEntity.ok(
+        bankService.listTransfers().stream().map(TransferResponse::from).toList());
   }
 
   @GetMapping("/{id}")
   @Operation(summary = "Get a transfer by ID")
-  @ApiResponse(responseCode = "200", description = "Transfer found")
-  @ApiResponse(responseCode = "401", description = "Missing or invalid JWT token")
-  @ApiResponse(responseCode = "404", description = "Transfer not found")
-  public ResponseEntity<?> getTransfer(@PathVariable UUID id) {
-    try {
-      return ResponseEntity.ok(bankService.getTransfer(id));
-    } catch (TransferNotFoundException ex) {
-      return ResponseEntity.status(404).body(Map.of("message", ex.getMessage()));
-    }
+  public ResponseEntity<TransferResponse> getTransfer(@PathVariable UUID id) {
+    return ResponseEntity.ok(TransferResponse.from(bankService.getTransfer(id)));
   }
 
   // ── Quest 1 ───────────────────────────────────────────────────────────────────
-  // Add @ApiResponse annotations for ALL seven possible response codes.
-  // AccountController.createAccount is your reference — it documents 201, 400, and 403.
-  // Add the missing four: 401, 404, 422, and 500.
+  // Add any missing OpenAPI @Operation / @Tag documentation you think is useful.
   //
   // Quest 2 ───────────────────────────────────────────────────────────────────
-  // Add a scope check for "transfers:write" authority.
-  // See AccountController.createAccount lines 69-75 for the exact pattern.
+  // Add @PreAuthorize("@bankPermission.canCreateTransfer(authentication)") to this method.
+  // See AccountController.createAccount and BankPermission for the pattern.
   //
   // Quest 3 ───────────────────────────────────────────────────────────────────
-  // Replace the 501 stub below with the full implementation:
-  //   TODO 1 – Scope check:      see AccountController.createAccount:69
-  //   TODO 2 – Ownership check:  fetch the source account, compare auth.getName() to owner
-  //   TODO 3 – Call service:     bankService.createTransfer(fromId, toId, amount)
-  //   TODO 4 – Map exceptions:   AccountNotFoundException→404, InsufficientFundsException→422,
-  //                              IllegalArgumentException→400; let everything else propagate
-  //   TODO 5 – Log & return:     log.info, ResponseEntity.created(location).body(transfer)
+  // Replace the 501 stub with the full implementation:
+  //   TODO 1 – Ownership check: fetch the source account, compare auth.getName() to owner
+  //            var source = bankService.getAccount(request.fromAccountId());
+  //            if (!auth.getName().equals(source.getOwner())) return ResponseEntity.status(403)...;
+  //   TODO 2 – Call service:    bankService.createTransfer(fromId, toId, amount)
+  //            Let AccountNotFoundException, InsufficientFundsException, and
+  //            IllegalArgumentException propagate — GlobalExceptionHandler maps them.
+  //   TODO 3 – Log & return:    log.info, ResponseEntity.created(location).body(TransferResponse.from(transfer))
   @PostMapping
   @Operation(summary = "Create a new transfer between accounts")
-  // Quest 1: add the missing @ApiResponse annotations below ↓
-  @ApiResponse(responseCode = "201", description = "Transfer created")
-  @ApiResponse(responseCode = "400", description = "Validation error or invalid argument")
-  @ApiResponse(responseCode = "403", description = "Missing transfers:write scope or caller is not the source account owner")
-  public ResponseEntity<?> createTransfer(
+  // Quest 2: add @PreAuthorize("@bankPermission.canCreateTransfer(authentication)") here ↓
+  public ResponseEntity<TransferResponse> createTransfer(
       @RequestBody CreateTransferRequest request, Authentication auth) {
 
-    // TODO 1 (Quest 2) – Scope check
-    // Pattern: AccountController.createAccount:69-75
-    // boolean hasScope = auth.getAuthorities().stream()
-    //     .anyMatch(a -> a.getAuthority().equals("SCOPE_transfers:write"));
-    // if (!hasScope) return ResponseEntity.status(403).body(...);
-
-    // TODO 2 (Quest 3) – Ownership check
-    // Fetch the source account and verify the caller owns it:
-    //   var sourceAccount = bankService.getAccount(request.fromAccountId());
-    //   if (!auth.getName().equals(sourceAccount.getOwner())) return ResponseEntity.status(403)...;
-
-    // TODO 3 (Quest 3) – Call service inside try/catch
-    // TODO 4 (Quest 3) – Map exceptions
-    //   AccountNotFoundException      → 404
-    //   InsufficientFundsException    → 422  (ResponseEntity.unprocessableEntity())
-    //   IllegalArgumentException      → 400
-    //   all others                    → rethrow (let Spring's exception handler return 500)
-
-    // TODO 5 (Quest 3) – Log & return 201
+    // TODO 1 (Quest 3) – Ownership check
+    // TODO 2 (Quest 3) – Call service (exceptions propagate to GlobalExceptionHandler)
+    // TODO 3 (Quest 3) – Log & return 201
     //   log.info("Transfer created: {}", transfer.getId());
     //   var location = URI.create("/v1/transfers/" + transfer.getId());
-    //   return ResponseEntity.created(location).body(transfer);
+    //   return ResponseEntity.created(location).body(TransferResponse.from(transfer));
 
-    return ResponseEntity.status(501).body(Map.of("message", "Not yet implemented — complete Quest 3."));
+    throw new UnsupportedOperationException("Not yet implemented — complete Quest 3.");
   }
 }

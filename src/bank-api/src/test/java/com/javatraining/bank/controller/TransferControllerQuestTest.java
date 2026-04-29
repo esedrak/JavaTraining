@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatraining.bank.config.JwtAuthenticationFilter;
 import com.javatraining.bank.config.SecurityConfig;
+import com.javatraining.bank.security.BankPermission;
 import com.javatraining.bank.domain.Account;
 import com.javatraining.bank.domain.Transfer;
 import com.javatraining.bank.domain.TransferStatus;
@@ -35,7 +36,8 @@ import org.springframework.test.web.servlet.MockMvc;
 /**
  * Bank Transfer Quest — integration tests.
  *
- * <p>Quest 2: Remove {@code @Disabled} from the two auth tests once you have wired the scope check.
+ * <p>Quest 2: Remove {@code @Disabled} from the two auth tests once you have added
+ * {@code @RequiresTransfersWrite} to {@code createTransfer}.
  *
  * <p>Quest 3: Remove {@code @Disabled} from the 201 and 400 tests once {@code createTransfer} is
  * implemented.
@@ -48,7 +50,7 @@ import org.springframework.test.web.servlet.MockMvc;
  * <pre>./gradlew :src:bank-api:test --tests "*.TransferControllerQuestTest"</pre>
  */
 @WebMvcTest(TransferController.class)
-@Import({SecurityConfig.class, JwtAuthenticationFilter.class})
+@Import({SecurityConfig.class, JwtAuthenticationFilter.class, BankPermission.class})
 @DisplayName("Transfer Controller — Quest Tests")
 class TransferControllerQuestTest {
 
@@ -87,11 +89,11 @@ class TransferControllerQuestTest {
   class Quest2Auth {
 
     /**
-     * Quest 2: Remove {@code @Disabled} once you have wired the scope check in
-     * {@code createTransfer}.
+     * Quest 2: Remove {@code @Disabled} once you have added
+     * {@code @PreAuthorize("hasAuthority('SCOPE_transfers:write')")} to {@code createTransfer}.
      */
     @Test
-    @Disabled("Quest 2 — remove @Disabled once scope check is wired")
+    @Disabled("Quest 2 — remove @Disabled once @PreAuthorize(@bankPermission) is added to createTransfer")
     @DisplayName("returns 401 when no token is provided")
     void createTransfer_returns401_whenNoToken() throws Exception {
       var body = json(new CreateTransferRequest(UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("50.00")));
@@ -104,11 +106,11 @@ class TransferControllerQuestTest {
     }
 
     /**
-     * Quest 2: Remove {@code @Disabled} once you have wired the scope check in
-     * {@code createTransfer}.
+     * Quest 2: Remove {@code @Disabled} once you have added
+     * {@code @PreAuthorize("hasAuthority('SCOPE_transfers:write')")} to {@code createTransfer}.
      */
     @Test
-    @Disabled("Quest 2 — remove @Disabled once scope check is wired")
+    @Disabled("Quest 2 — remove @Disabled once @PreAuthorize(@bankPermission) is added to createTransfer")
     @DisplayName("returns 403 when token lacks transfers:write scope")
     void createTransfer_returns403_whenScopeMissing() throws Exception {
       var body = json(new CreateTransferRequest(UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("50.00")));
