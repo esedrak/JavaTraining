@@ -7,10 +7,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.javatraining.bank.config.SecurityConfig;
-import com.javatraining.bank.security.BankPermission;
 import com.javatraining.bank.domain.Transfer;
 import com.javatraining.bank.domain.TransferStatus;
 import com.javatraining.bank.domain.exception.TransferNotFoundException;
+import com.javatraining.bank.security.BankPermission;
 import com.javatraining.bank.service.BankService;
 import java.math.BigDecimal;
 import java.util.List;
@@ -26,7 +26,11 @@ import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 
 @WebMvcTest(TransferController.class)
-@Import({SecurityConfig.class, com.javatraining.bank.config.JwtAuthenticationFilter.class, BankPermission.class})
+@Import({
+  SecurityConfig.class,
+  com.javatraining.bank.config.JwtAuthenticationFilter.class,
+  BankPermission.class
+})
 @DisplayName("TransferController")
 class TransferControllerTest {
 

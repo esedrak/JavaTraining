@@ -2,7 +2,6 @@ package com.javatraining.bank.controller;
 
 import com.javatraining.bank.dto.AccountResponse;
 import com.javatraining.bank.dto.CreateAccountRequest;
-import org.springframework.security.access.prepost.PreAuthorize;
 import com.javatraining.bank.service.BankService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
@@ -13,6 +12,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +37,8 @@ public class AccountController {
   @GetMapping
   @Operation(summary = "List all accounts")
   public ResponseEntity<List<AccountResponse>> listAccounts() {
-    return ResponseEntity.ok(bankService.listAccounts().stream().map(AccountResponse::from).toList());
+    return ResponseEntity.ok(
+        bankService.listAccounts().stream().map(AccountResponse::from).toList());
   }
 
   @GetMapping("/{id}")

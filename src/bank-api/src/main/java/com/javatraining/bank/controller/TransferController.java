@@ -6,7 +6,6 @@ import com.javatraining.bank.service.BankService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 import org.slf4j.Logger;
@@ -62,7 +61,8 @@ public class TransferController {
   //   TODO 2 – Call service:    bankService.createTransfer(fromId, toId, amount)
   //            Let AccountNotFoundException, InsufficientFundsException, and
   //            IllegalArgumentException propagate — GlobalExceptionHandler maps them.
-  //   TODO 3 – Log & return:    log.info, ResponseEntity.created(location).body(TransferResponse.from(transfer))
+  //   TODO 3 – Log & return:    log.info,
+  // ResponseEntity.created(location).body(TransferResponse.from(transfer))
   @PostMapping
   @Operation(summary = "Create a new transfer between accounts")
   // Quest 2: add @PreAuthorize("@bankPermission.canCreateTransfer(authentication)") here ↓

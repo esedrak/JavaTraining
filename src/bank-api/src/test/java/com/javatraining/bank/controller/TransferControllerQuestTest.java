@@ -10,13 +10,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.javatraining.bank.config.JwtAuthenticationFilter;
 import com.javatraining.bank.config.SecurityConfig;
-import com.javatraining.bank.security.BankPermission;
 import com.javatraining.bank.domain.Account;
 import com.javatraining.bank.domain.Transfer;
 import com.javatraining.bank.domain.TransferStatus;
-import com.javatraining.bank.domain.exception.AccountNotFoundException;
-import com.javatraining.bank.domain.exception.InsufficientFundsException;
 import com.javatraining.bank.dto.CreateTransferRequest;
+import com.javatraining.bank.security.BankPermission;
 import com.javatraining.bank.service.BankService;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -93,14 +91,17 @@ class TransferControllerQuestTest {
      * {@code @PreAuthorize("hasAuthority('SCOPE_transfers:write')")} to {@code createTransfer}.
      */
     @Test
-    @Disabled("Quest 2 — remove @Disabled once @PreAuthorize(@bankPermission) is added to createTransfer")
+    @Disabled(
+        "Quest 2 — remove @Disabled once @PreAuthorize(@bankPermission) is added to createTransfer")
     @DisplayName("returns 401 when no token is provided")
     void createTransfer_returns401_whenNoToken() throws Exception {
-      var body = json(new CreateTransferRequest(UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("50.00")));
+      var body =
+          json(
+              new CreateTransferRequest(
+                  UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("50.00")));
 
       mockMvc
-          .perform(
-              post("/v1/transfers").contentType(MediaType.APPLICATION_JSON).content(body))
+          .perform(post("/v1/transfers").contentType(MediaType.APPLICATION_JSON).content(body))
           // No user() post-processor → Spring Security returns 401
           .andExpect(status().isUnauthorized());
     }
@@ -110,10 +111,14 @@ class TransferControllerQuestTest {
      * {@code @PreAuthorize("hasAuthority('SCOPE_transfers:write')")} to {@code createTransfer}.
      */
     @Test
-    @Disabled("Quest 2 — remove @Disabled once @PreAuthorize(@bankPermission) is added to createTransfer")
+    @Disabled(
+        "Quest 2 — remove @Disabled once @PreAuthorize(@bankPermission) is added to createTransfer")
     @DisplayName("returns 403 when token lacks transfers:write scope")
     void createTransfer_returns403_whenScopeMissing() throws Exception {
-      var body = json(new CreateTransferRequest(UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("50.00")));
+      var body =
+          json(
+              new CreateTransferRequest(
+                  UUID.randomUUID(), UUID.randomUUID(), new BigDecimal("50.00")));
 
       mockMvc
           .perform(
@@ -131,9 +136,7 @@ class TransferControllerQuestTest {
   @DisplayName("Quest 3 — implementation")
   class Quest3Impl {
 
-    /**
-     * Quest 3: Remove {@code @Disabled} once {@code createTransfer} returns 201.
-     */
+    /** Quest 3: Remove {@code @Disabled} once {@code createTransfer} returns 201. */
     @Test
     @Disabled("Quest 3 — remove @Disabled once createTransfer is implemented")
     @DisplayName("returns 201 with Location header when transfer succeeds")
@@ -152,16 +155,16 @@ class TransferControllerQuestTest {
       mockMvc
           .perform(
               post("/v1/transfers")
-                  .with(user("alice").authorities(new SimpleGrantedAuthority("SCOPE_transfers:write")))
+                  .with(
+                      user("alice")
+                          .authorities(new SimpleGrantedAuthority("SCOPE_transfers:write")))
                   .contentType(MediaType.APPLICATION_JSON)
                   .content(json(new CreateTransferRequest(fromId, toId, amount))))
           .andExpect(status().isCreated())
           .andExpect(jsonPath("$.amount").value(100.00));
     }
 
-    /**
-     * Quest 3: Remove {@code @Disabled} once exception mapping is implemented.
-     */
+    /** Quest 3: Remove {@code @Disabled} once exception mapping is implemented. */
     @Test
     @Disabled("Quest 3 — remove @Disabled once createTransfer is implemented")
     @DisplayName("returns 400 when service throws IllegalArgumentException")
@@ -180,7 +183,9 @@ class TransferControllerQuestTest {
       mockMvc
           .perform(
               post("/v1/transfers")
-                  .with(user("alice").authorities(new SimpleGrantedAuthority("SCOPE_transfers:write")))
+                  .with(
+                      user("alice")
+                          .authorities(new SimpleGrantedAuthority("SCOPE_transfers:write")))
                   .contentType(MediaType.APPLICATION_JSON)
                   .content(json(new CreateTransferRequest(fromId, toId, amount))))
           .andExpect(status().isBadRequest())
@@ -201,8 +206,10 @@ class TransferControllerQuestTest {
      * source account is owned by "bob". The controller must return {@code 403 Forbidden}.
      *
      * <p>Steps:
+     *
      * <ol>
-     *   <li>Stub {@code bankService.getAccount(fromId)} to return an account owned by {@code "bob"}.
+     *   <li>Stub {@code bankService.getAccount(fromId)} to return an account owned by {@code
+     *       "bob"}.
      *   <li>Perform POST as {@code user("alice")} with {@code SCOPE_transfers:write}.
      *   <li>Assert {@code status().isForbidden()}.
      * </ol>
@@ -222,6 +229,7 @@ class TransferControllerQuestTest {
      * AccountNotFoundException}. The controller must return {@code 404 Not Found}.
      *
      * <p>Steps:
+     *
      * <ol>
      *   <li>Stub {@code bankService.getAccount(fromId)} to throw {@code new
      *       AccountNotFoundException(fromId)}.
@@ -246,6 +254,7 @@ class TransferControllerQuestTest {
      * return {@code 422 Unprocessable Entity}.
      *
      * <p>Steps:
+     *
      * <ol>
      *   <li>Stub {@code bankService.getAccount(fromId)} to return an account owned by {@code
      *       "alice"} with a low balance (e.g. {@code "10.00"}).
