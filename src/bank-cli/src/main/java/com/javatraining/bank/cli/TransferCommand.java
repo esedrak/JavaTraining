@@ -71,35 +71,17 @@ public class TransferCommand {
 
     @Override
     public Integer call() throws Exception {
-      var token = requireToken();
-      if (token == null) return 1;
-
-      var body =
-          String.format(
-              "{\"fromAccountId\":\"%s\",\"toAccountId\":\"%s\",\"amount\":%s}",
-              fromAccountId, toAccountId, amount);
-
-      var request =
-          withBearer(
-                  HttpRequest.newBuilder()
-                      .uri(URI.create(API_URL + "/v1/transfers"))
-                      .POST(HttpRequest.BodyPublishers.ofString(body))
-                      .header("Content-Type", "application/json"),
-                  token)
-              .build();
-
-      var response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response.body());
-
-      if (response.statusCode() == 401) {
-        System.err.println("Error: token missing or expired — re-run the POST /v1/token command and re-export BANK_TOKEN.");
-        return 1;
-      }
-      if (response.statusCode() == 403) {
-        System.err.println("Error: token lacks the 'transfers:write' scope.");
-        return 1;
-      }
-      return response.statusCode() < 400 ? 0 : 1;
+      // TODO (Bonus Quest 2): implement authenticated transfer
+      // 1. Call requireToken() — return 1 if null
+      // 2. Build JSON body: {"fromAccountId":"...","toAccountId":"...","amount":...}
+      // 3. POST /v1/transfers with Content-Type: application/json and Authorization: Bearer <token>
+      //    Pattern: AccountCommand.Create.call()
+      // 4. Print the response body
+      // 5. On 401: print "token missing or expired" message
+      //    On 403: print "missing transfers:write scope" message
+      // 6. Return 0 on success, 1 on any 4xx/5xx
+      System.err.println("Not yet implemented — complete Bonus Quest 2.");
+      return 1;
     }
   }
 

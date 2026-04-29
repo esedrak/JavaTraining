@@ -53,25 +53,15 @@ public class AccountCommand {
 
     @Override
     public Integer call() throws Exception {
-      var token = requireToken();
-      if (token == null) return 1;
-
-      var request =
-          withBearer(
-                  HttpRequest.newBuilder()
-                      .uri(URI.create(API_URL + "/v1/accounts/" + id))
-                      .GET(),
-                  token)
-              .build();
-
-      var response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
-      System.out.println(response.body());
-
-      if (response.statusCode() == 404) {
-        System.err.println("Error: account " + id + " not found.");
-        return 1;
-      }
-      return response.statusCode() < 400 ? 0 : 1;
+      // TODO (Bonus Quest 1): implement account get
+      // 1. Call requireToken() — return 1 if null
+      // 2. Build GET /v1/accounts/{id} with the bearer token via withBearer(...)
+      //    Pattern: AccountCommand.List.call()
+      // 3. Send with CLIENT.send(...) and print the response body
+      // 4. On 404, print a friendly "account <id> not found" message and return 1
+      // 5. Return 0 on success, 1 on any other 4xx/5xx
+      System.err.println("Not yet implemented — complete Bonus Quest 1.");
+      return 1;
     }
   }
 
