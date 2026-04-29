@@ -45,7 +45,8 @@ public class TransferActivitiesImpl implements TransferActivities {
 
   private static final Logger log = LoggerFactory.getLogger(TransferActivitiesImpl.class);
 
-  // TODO (Quest 5): inject BankService (and optionally TransactionRepository for idempotency checks)
+  // TODO (Quest 5): inject BankService (and optionally TransactionRepository for idempotency
+  // checks)
   //   via constructor injection
 
   @Override

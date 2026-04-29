@@ -4,7 +4,6 @@ import com.javatraining.bank.temporal.activity.TransferActivities;
 import com.javatraining.bank.temporal.dto.TransferInput;
 import com.javatraining.bank.temporal.dto.TransferResult;
 import com.javatraining.bank.temporal.workflow.DurableTransferWorkflow;
-import io.temporal.activity.ActivityOptions;
 import io.temporal.workflow.Workflow;
 import java.time.Duration;
 import org.slf4j.Logger;

@@ -101,8 +101,10 @@ public class TransferCommand {
       var token = requireToken();
       if (token == null) return 1;
 
-      // TODO (Bonus Quest): Send the approval signal via POST /v1/durable-transfers/{workflowId}/approve
-      // 1. Build a POST request to API_URL + "/v1/durable-transfers/" + workflowId + "/signal/approve"
+      // TODO (Bonus Quest): Send the approval signal via POST
+      // /v1/durable-transfers/{workflowId}/approve
+      // 1. Build a POST request to API_URL + "/v1/durable-transfers/" + workflowId +
+      // "/signal/approve"
       //    with the bearer token.
       // 2. Print the response body.
       // 3. On 404, print "Workflow not found or already completed".

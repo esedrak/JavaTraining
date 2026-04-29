@@ -38,16 +38,16 @@ import org.junit.jupiter.api.Test;
  *
  * <h2>Quest 3</h2>
  *
- * Read each {@code @Disabled} test and understand what it asserts before writing any code.
- * Confirm the tests compile and are skipped:
+ * Read each {@code @Disabled} test and understand what it asserts before writing any code. Confirm
+ * the tests compile and are skipped:
  *
  * <pre>./gradlew :src:temporal-worker:test --tests "*.DurableTransferWorkflowTest"
  * # Expected: 5 skipped, 0 failures</pre>
  *
  * <h2>Quest 4</h2>
  *
- * Implement {@link DurableTransferWorkflowImpl}, then remove {@code @Disabled} from each test
- * one by one as you implement each execution path.
+ * Implement {@link DurableTransferWorkflowImpl}, then remove {@code @Disabled} from each test one
+ * by one as you implement each execution path.
  */
 @DisplayName("DurableTransferWorkflow")
 class DurableTransferWorkflowTest {
@@ -160,8 +160,7 @@ class DurableTransferWorkflowTest {
     stub.approve();
 
     // Collect the result — WorkflowStub.fromTyped wraps the typed stub for getResult()
-    TransferResult result =
-        WorkflowStub.fromTyped(stub).getResult(TransferResult.class);
+    TransferResult result = WorkflowStub.fromTyped(stub).getResult(TransferResult.class);
 
     assertThat(result.status()).isEqualTo("COMPLETED");
     verify(activities).debitAccount(input.fromAccountId(), input.amount(), input.transferId());
